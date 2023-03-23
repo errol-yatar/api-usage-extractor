@@ -3,7 +3,7 @@ const sfdx = require("sfdx-node");
 const fetch = require("node-fetch");
 const csv = require("csvtojson");
 const fs = require("fs");
-var parseArgs = require('minimist')
+var parseArgs = require("minimist");
 
 const DEPRECATED_API_VERSIONS = [
     "21.0",
@@ -15,7 +15,7 @@ const DEPRECATED_API_VERSIONS = [
     "27.0",
     "28.0",
     "29.0",
-    "30.0",
+    "30.0"
 ];
 
 var argv = parseArgs(process.argv.slice(2));
@@ -48,12 +48,13 @@ sfdx.auth.web
     })
     .then((login) => {
         console.log("Successfully logged into " + login.username);
-        let query = "SELECT LogFile, EventType, CreatedDate FROM EventLogFile WHERE EventType IN ('API', 'RestApi', 'ApiTotalUsage')";
+        let query =
+            "SELECT LogFile, EventType, CreatedDate FROM EventLogFile WHERE EventType IN ('API', 'RestApi', 'ApiTotalUsage')";
         if (limit) {
-            query += ` LIMIT ${limit}`
+            query += ` LIMIT ${limit}`;
         }
         if (offset) {
-            query += ` OFFSET ${offset}`
+            query += ` OFFSET ${offset}`;
         }
         sfdx.force.data
             .soqlQuery({
@@ -92,12 +93,30 @@ sfdx.auth.web
                                 allJsonData.forEach((jsonData) => {
                                     jsonData.forEach((apiCall) => {
                                         logsScanned += 1;
-                                        if (apiCall.EVENT_TYPE === 'RestApi') {
-                                            if (DEPRECATED_API_VERSIONS.includes(apiCall.URI.split('/')[3].replace("v",""))) {
+                                        if (apiCall.EVENT_TYPE === "RestApi") {
+                                            if (
+                                                DEPRECATED_API_VERSIONS.includes(
+                                                    apiCall.URI.split(
+                                                        "/"
+                                                    )[3].replace("v", "")
+                                                )
+                                            ) {
                                                 offenders.push(apiCall);
                                             }
-                                        }
-                                        else {
+                                        } else if (
+                                            apiCall.EVENT_TYPE === "API"
+                                        ) {
+                                            if (
+                                                ["E", "P"].includes(
+                                                    apiCall.API_TYPE
+                                                ) &&
+                                                DEPRECATED_API_VERSIONS.includes(
+                                                    apiCall.API_VERSION
+                                                )
+                                            ) {
+                                                offenders.push(apiCall);
+                                            }
+                                        } else {
                                             if (apiCall.API_VERSION) {
                                                 if (
                                                     DEPRECATED_API_VERSIONS.includes(
@@ -117,7 +136,9 @@ sfdx.auth.web
                                     let filePath = `${require("path").join(
                                         require("os").homedir(),
                                         ""
-                                    )}\\api_usage_report_${Math.floor(new Date().getTime() / 1000)}.csv`;
+                                    )}\\api_usage_report_${Math.floor(
+                                        new Date().getTime() / 1000
+                                    )}.csv`;
 
                                     const items = offenders;
                                     const replacer = (key, value) =>
