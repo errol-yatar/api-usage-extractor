@@ -26,8 +26,8 @@ Usage:
 
 We recommend starting at the `limit` of 5 and `offset` of 0, incrementing the `offset` with every run by 5. For example:
 
-First run: `node app.js --limit 5 offset 0`<br />
-Second run: `node app.js --limit 5 offset 5`<br />
-Third run: `node app.js --limit 5 offset 10`<br />
+First run: `node app.js --limit 5 --offset 0`<br />
+Second run: `node app.js --limit 5 --offset 5`<br />
+Third run: `node app.js --limit 5 --offset 10`<br />
 
 so on and so forth...
