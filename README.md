@@ -17,6 +17,9 @@ A simple API Usage Extractor for Salesforce. This application was made to automa
 If there were detected legacy API calls to Salesforce, it will create a .csv file containing the logs of the API call. It is saved by default in your USER folder.
 
 # launch options
+
+To use launch options, just append the argument into after the `node app.js` command. e.g.: `node app.js --extractall`
+
 ### `--extractall`
 - allows you to extract all the CSV log files into a folder.
 
