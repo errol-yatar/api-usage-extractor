@@ -10,6 +10,7 @@ A simple API Usage Extractor for Salesforce. This application was made to automa
 - Download zip
 - Extract
 - Go to the extracted files, right in an empty area and click `Open in Terminal`
+- Type `npm install`. Press Enter
 - Type `node app.js`. Press Enter
 - Choose an environment and login to your org
 
