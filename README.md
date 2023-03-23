@@ -9,7 +9,7 @@ A simple API Usage Extractor for Salesforce. This application was made to automa
 # how to use
 - Download zip or clone the repository
 - Extract zip if needed
-- Go to the folder directory containing the `app.js` file, right click in an empty area and click `Open in Terminal` (to launch Windows PowerShell), or `Git Bash Here` (if you have Git installed).
+- Go to the folder directory containing the `app.js` file, right click in an empty area of the window and click `Open in Terminal` (to launch Windows PowerShell), or `Git Bash Here` (if you have Git installed).
 - Type `npm install`. Press Enter
 - Type `node app.js`. Press Enter
 - Choose an environment and login to your org
