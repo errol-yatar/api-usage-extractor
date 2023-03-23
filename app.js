@@ -93,7 +93,9 @@ sfdx.auth.web
                             let dir = `${require("path").join(
                                 require("os").homedir(),
                                 ""
-                            )}\\api_usage_extractor\\exports`;
+                            )}\\api_usage_extractor\\exports_${Math.floor(
+                                new Date().getTime() / 1000
+                            )}`;
 
                             if (!fs.existsSync(dir)) {
                                 fs.mkdirSync(dir, { recursive: true });
