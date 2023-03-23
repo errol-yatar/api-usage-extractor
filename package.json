@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "csvtojson": "^2.0.10",
+    "minimist": "^1.2.8",
+    "node-fetch": "^2.6.9",
+    "prompt-sync": "^4.2.0",
+    "sfdx-node": "^3.8.0"
+  }
+}
