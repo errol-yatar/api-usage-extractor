@@ -92,13 +92,20 @@ sfdx.auth.web
                                 allJsonData.forEach((jsonData) => {
                                     jsonData.forEach((apiCall) => {
                                         logsScanned += 1;
-                                        if (apiCall.API_VERSION) {
-                                            if (
-                                                DEPRECATED_API_VERSIONS.includes(
-                                                    apiCall.API_VERSION
-                                                )
-                                            ) {
+                                        if (apiCall.EVENT_TYPE === 'RestApi') {
+                                            if (DEPRECATED_API_VERSIONS.includes(apiCall.URI.split('/')[3].replace("v",""))) {
                                                 offenders.push(apiCall);
+                                            }
+                                        }
+                                        else {
+                                            if (apiCall.API_VERSION) {
+                                                if (
+                                                    DEPRECATED_API_VERSIONS.includes(
+                                                        apiCall.API_VERSION
+                                                    )
+                                                ) {
+                                                    offenders.push(apiCall);
+                                                }
                                             }
                                         }
                                     });
