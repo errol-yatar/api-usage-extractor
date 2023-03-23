@@ -117,9 +117,7 @@ sfdx.auth.web
                                     let filePath = `${require("path").join(
                                         require("os").homedir(),
                                         ""
-                                    )}\\api_usage_report_${new Date()
-                                        .toJSON()
-                                        .slice(0, 10)}.csv`;
+                                    )}\\api_usage_report_${Math.floor(new Date().getTime() / 1000)}.csv`;
 
                                     const items = offenders;
                                     const replacer = (key, value) =>
