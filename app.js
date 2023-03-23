@@ -15,12 +15,13 @@ const DEPRECATED_API_VERSIONS = [
     "27.0",
     "28.0",
     "29.0",
-    "30.0"
+    "30.0",
 ];
 
 var argv = parseArgs(process.argv.slice(2));
 const offset = argv["offset"];
 const limit = argv["limit"];
+const extractall = argv["extractall"];
 
 console.log("Please select your environment: ");
 console.log("[P] Production");
@@ -88,6 +89,36 @@ sfdx.auth.web
                         data.forEach((csvFile) => {
                             csvs.push(csv().fromString(csvFile));
                         });
+                        if (extractall) {
+                            let dir = `${require("path").join(
+                                require("os").homedir(),
+                                ""
+                            )}\\api_usage_extractor\\exports`;
+
+                            if (!fs.existsSync(dir)) {
+                                fs.mkdirSync(dir, { recursive: true });
+                            }
+                            let files = [];
+                            data.forEach((csvFile, index) => {
+                                files.push(
+                                    fs.writeFile(
+                                        dir +
+                                            `/api_usage_report_${index}_${Math.floor(
+                                                new Date().getTime() / 1000
+                                            )}.csv`,
+                                        csvFile,
+                                        (err) => {
+                                            if (err) {
+                                                console.log(err);
+                                            }
+                                        }
+                                    )
+                                );
+                            });
+                            console.log(
+                                "Successfully exported api logs to " + dir
+                            );
+                        }
                         Promise.all(csvs)
                             .then((allJsonData) => {
                                 allJsonData.forEach((jsonData) => {

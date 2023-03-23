@@ -7,14 +7,24 @@ A simple API Usage Extractor for Salesforce. This application was made to automa
 - [salesforce-cli](https://developer.salesforce.com/tools/sfdxcli)
 
 # how to use
-- Download zip
-- Extract
-- Go to the extracted files, right in an empty area and click `Open in Terminal`
+- Download zip or clone the repository
+- Extract zip if needed
+- Go to the folder directory containing the `app.js` file, right click in an empty area and click `Open in Terminal`
 - Type `npm install`. Press Enter
 - Type `node app.js`. Press Enter
 - Choose an environment and login to your org
 
 If there were detected legacy API calls to Salesforce, it will create a .csv file containing the logs of the API call. It is saved by default in your USER folder.
+
+# launch options
+### `--extractall`
+- allows you to extract all the CSV log files into a folder.
+
+### `--limit <n>`
+- allows you to limit up to `n` rows of the log files to be exported.
+
+### `--offset <n>`
+- allows you to set the offset to `n` rows of the log files to be exported.
 
 # for large orgs
 
